@@ -2,7 +2,10 @@ import java.time.LocalDate;
 
 public class Client {
 
-    private String name, lastname, mainPhone, secondaryPhone;
+    private String name;
+    private String lastName;
+    private String mainPhone;
+    private String secondaryPhone;
     private LocalDate birthday;
     private Adress adress;
 
@@ -10,9 +13,9 @@ public class Client {
 
     }
 
-    public Client(String name, String lastname, String mainPhone, String secondaryPhone, LocalDate birthday, Adress adress) {
+    public Client(String name, String lastName, String mainPhone, String secondaryPhone, LocalDate birthday, Adress adress) {
         this.name = name;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.mainPhone = mainPhone;
         this.secondaryPhone = secondaryPhone;
         this.birthday = birthday;
@@ -27,12 +30,12 @@ public class Client {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getMainPhone() {
