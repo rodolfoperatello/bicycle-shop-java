@@ -1,9 +1,13 @@
 public class Adress {
 
-    private String street, district, city, state, cep;
-    private int number;
+    private String street;
+    private String district;
+    private String city;
+    private String state;
+    private String cep;
+    private String number;
 
-    public Adress(String street, String district, String city, String state, String cep, int number) {
+    public Adress(String street, String district, String city, String state, String cep, String number) {
         this.street = street;
         this.district = district;
         this.city = city;
@@ -52,11 +56,11 @@ public class Adress {
         this.state = state;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 }
