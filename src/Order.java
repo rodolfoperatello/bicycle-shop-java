@@ -30,19 +30,19 @@ public class Order {
             YearMonth convertOrderDate = YearMonth.from(this.getOrderDate());
             if (creditCardValidThru.isAfter(convertOrderDate)) {
                 this.paymentMethod = paymentMethod;
-                this.paymentMethod.setPaymentValue(getOrderTotal(this.quantitaty, this.product.getPrice()));
+                this.paymentMethod.setPaymentValue(getOrderTotal(this.quantitaty, this.product));
             } else {
                 throw new CreditCardException("Cartão de crédito expirado");
             }
         } else {
             this.paymentMethod = paymentMethod;
-            this.paymentMethod.setPaymentValue(getOrderTotal(this.quantitaty, this.product.getPrice()));
+            this.paymentMethod.setPaymentValue(getOrderTotal(this.quantitaty, this.product));
         }
     }
 
     public void increaseQuantitaty() throws OrderException {
         this.quantitaty +=1;
-        this.orderTotal = getOrderTotal(this.quantitaty, product.getPrice());
+        this.orderTotal = getOrderTotal(this.quantitaty, this.product);
         if (this.paymentMethod != null) {
             this.paymentMethod.setPaymentValue(getOrderTotal());
         } else {
@@ -52,7 +52,7 @@ public class Order {
 
     public void decreaseQuantitaty() throws OrderException {
         this.quantitaty -=1;
-        this.orderTotal = getOrderTotal(this.quantitaty, product.getPrice());
+        this.orderTotal = getOrderTotal(this.quantitaty, this.product);
         if (this.paymentMethod != null) {
            this.paymentMethod.setPaymentValue(getOrderTotal());
         } else {
@@ -99,9 +99,7 @@ public class Order {
 
     private void setOrdemTotal(int quantitaty, Product product) throws OrderException {
         if (quantitaty > 0 && product != null) {
-            BigDecimal convertQuantitaty = new BigDecimal(quantitaty);
-            BigDecimal orderTotal = convertQuantitaty.multiply(product.getPrice());
-            this.orderTotal = orderTotal;
+            this.orderTotal = getOrderTotal(quantitaty, product);
         } else {
             throw new OrderException("Para definir o valor total da ordem a quantidade" +
                     "de produto deve ser maior que zero e o produto não pode ser nulo");
@@ -127,6 +125,12 @@ public class Order {
     }
 
     public BigDecimal getOrderTotal() {
+        return orderTotal;
+    }
+
+    private BigDecimal getOrderTotal(int quantitaty, BigDecimal product){
+        BigDecimal convertQuantitaty = new BigDecimal(quantitaty);
+        BigDecimal orderTotal = convertQuantitaty.multiply(product.getPrice());
         return orderTotal;
     }
 
