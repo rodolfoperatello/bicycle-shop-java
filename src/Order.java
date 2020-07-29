@@ -15,57 +15,59 @@ public class Order {
 
     }
 
-    public Order(Product product, int quantitaty, PaymentMethod paymentMethod, Client client, LocalDate orderDate) throws OrderException {
-        setProduct(product);
-        setQuantitaty(quantitaty);
+    public Order(Product product, int quantitaty, PaymentMethod paymentMethod, Client client, LocalDate orderDate) throws OrderException, CreditCardException {
+        setOrderDate(orderDate);
         setPaymentMethod(paymentMethod);
         setClient(client);
-        setOrderDate(orderDate);
-        setOrdemTotal(quantitaty, product);
+        setProduct(product);
+        setQuantitaty(quantitaty);
+        setOrderTotal(quantitaty, product);
+        updatePaymentMethodValue();
     }
-    //corrigir as entradas
-    private void  paymentMethodValidation(PaymentMethod paymentMethod) throws CreditCardExcepton, OrderException {
+
+    private void setOrderTotal(int quantitaty, Product product) throws OrderException {
+        this.orderTotal = getOrderTotal(quantitaty, product);
+        updatePaymentMethodValue();
+    }
+
+    private void updatePaymentMethodValue() {
+        this.getPaymentMethod().setPaymentValue(getOrderTotal(this.getQuantitaty(), this.getProduct()));
+    }
+
+    private void  paymentMethodValidation(PaymentMethod paymentMethod) throws CreditCardException {
         if (paymentMethod instanceof CreditCard) {
             YearMonth creditCardValidThru = ((CreditCard) paymentMethod).getValidThru();
             YearMonth convertOrderDate = YearMonth.from(this.getOrderDate());
             if (creditCardValidThru.isAfter(convertOrderDate)) {
                 this.paymentMethod = paymentMethod;
-                this.paymentMethod.setPaymentValue(getOrderTotal(this.quantitaty, this.product));
             } else {
                 throw new CreditCardException("Cartão de crédito expirado");
             }
         } else {
             this.paymentMethod = paymentMethod;
-            this.paymentMethod.setPaymentValue(getOrderTotal(this.quantitaty, this.product));
         }
     }
 
     public void increaseQuantitaty() throws OrderException {
         this.quantitaty +=1;
-        this.orderTotal = getOrderTotal(this.quantitaty, this.product);
-        if (this.paymentMethod != null) {
-            this.paymentMethod.setPaymentValue(getOrderTotal());
-        } else {
-            throw new OrderException("O método de pagamento é nulo");
-        }
+        setOrderTotal(quantitaty, this.getProduct());
     }
 
     public void decreaseQuantitaty() throws OrderException {
-        this.quantitaty -=1;
-        this.orderTotal = getOrderTotal(this.quantitaty, this.product);
-        if (this.paymentMethod != null) {
-           this.paymentMethod.setPaymentValue(getOrderTotal());
+        if (this.getQuantitaty() > 1 ) {
+            this.quantitaty -=1;
+            setOrderTotal(quantitaty, this.getProduct());
         } else {
-            throw new OrderException("O método de pagamento é nulo");
+            throw new OrderException("A quantidade de produtos deve ser maior ou igual a um");
         }
     }
-
 
     public void setQuantitaty(int quantitaty) throws OrderException{
         if (quantitaty > 0) {
             this.quantitaty = quantitaty;
+            setOrderTotal(quantitaty, this.getProduct());
         } else {
-            throw new OrderException("A quantidade de produtos não pode ser menor que zero");
+            throw new OrderException("A quantidade de produtos deve ser maior que zero");
         }
     }
 
@@ -73,15 +75,19 @@ public class Order {
         if (client != null) {
             this.client = client;
         } else {
-            throw new OrderException("O cliente cliente não pode ser nulo");
+            throw new OrderException("O cliente não pode ser nulo");
         }
     }
 
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
+    public void setOrderDate(LocalDate orderDate) throws OrderException {
+        if (orderDate != null) {
+            this.orderDate = orderDate;
+        } else {
+            throw new OrderException("A data da ordem não pode ser nula");
+        }
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) throws OrderException {
+    public void setPaymentMethod(PaymentMethod paymentMethod) throws OrderException, CreditCardException {
         if (paymentMethod != null) {
             paymentMethodValidation(paymentMethod);
         } else {
@@ -92,31 +98,22 @@ public class Order {
     public void setProduct(Product product) throws OrderException {
         if (product != null) {
             this.product = product;
+            setOrderTotal(this.getQuantitaty(), product);
         } else {
             throw new OrderException("O produto não pode ser nulo");
         }
     }
 
-    private void setOrdemTotal(int quantitaty, Product product) throws OrderException {
-        if (quantitaty > 0 && product != null) {
-            this.orderTotal = getOrderTotal(quantitaty, product);
-        } else {
-            throw new OrderException("Para definir o valor total da ordem a quantidade" +
-                    "de produto deve ser maior que zero e o produto não pode ser nulo");
-        }
-    }
-
     public void setOrderTotal(BigDecimal orderTotal) throws OrderException{
-        if (orderTotal.compareTo(new BigDecimal(0)) == 1) {
-            this.orderTotal = orderTotal;
-            if (this.paymentMethod != null) {
-                this.paymentMethod.setPaymentValue(getOrderTotal());
+        if (orderTotal != null ){
+            if (orderTotal.compareTo(new BigDecimal(-1)) == 1) {
+                this.orderTotal = orderTotal;
+                this.getPaymentMethod().setPaymentValue(this.getOrderTotal());
             } else {
-                throw new OrderException("O valor da ordem não foi inserido no método" +
-                        "de pagamento");
+                throw new OrderException("O valor da ordem não pode ser menor que zero");
             }
         } else {
-            throw new OrderException("O valor da ordem não pode ser menor que zero");
+            throw new OrderException("O valor da ordem não pode ser nulo");
         }
     }
 
@@ -128,7 +125,7 @@ public class Order {
         return orderTotal;
     }
 
-    private BigDecimal getOrderTotal(int quantitaty, BigDecimal product){
+    private BigDecimal getOrderTotal(int quantitaty, Product product){
         BigDecimal convertQuantitaty = new BigDecimal(quantitaty);
         BigDecimal orderTotal = convertQuantitaty.multiply(product.getPrice());
         return orderTotal;
@@ -149,6 +146,5 @@ public class Order {
     public LocalDate getOrderDate() {
         return orderDate;
     }
-
 
 }
