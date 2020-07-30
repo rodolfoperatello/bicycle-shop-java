@@ -15,8 +15,8 @@ public class Order {
 
     }
 
-    public Order(Product product, int quantitaty, PaymentMethod paymentMethod, Client client, LocalDate orderDate) throws OrderException, CreditCardException {
-        setOrderDate(orderDate);
+    public Order(Product product, int quantitaty, PaymentMethod paymentMethod, Client client) throws OrderException, CreditCardException {
+        this.orderDate = LocalDate.now();
         setPaymentMethod(paymentMethod);
         setClient(client);
         setProduct(product);
