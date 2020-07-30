@@ -6,10 +6,10 @@ public class BankSlip extends PaymentMethod{
     private LocalDate creationDate;
     private LocalDate expirationDate;
 
-     public BankSlip(String number, LocalDate creationDate, LocalDate expirationDate) {
+    public BankSlip(String number) {
         this.number = number;
-        this.creationDate = creationDate;
-        this.expirationDate = expirationDate;
+        this.creationDate = LocalDate.now();
+        this.expirationDate = getCreationDate().plusDays(7);
     }
 
     public LocalDate getExpirationDate() {
@@ -28,5 +28,5 @@ public class BankSlip extends PaymentMethod{
         this.number = number;
     }
 
-
 }
+
