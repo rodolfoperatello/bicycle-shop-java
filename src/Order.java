@@ -102,7 +102,7 @@ public class Order {
         if (orderTotal == null) {
             throw new OrderException("O valor da ordem não pode ser nulo");
         }
-        if (orderTotal.compareTo(new BigDecimal(-0)) == -1) {
+        if (orderTotal.doubleValue() < 0) {
             throw new OrderException("O valor da ordem não pode ser menor que zero");
         }
         this.orderTotal = orderTotal;
