@@ -26,6 +26,7 @@ public class Product {
     public Product(String name, ProductCategory productCategory, BigDecimal price) {
         this.name = name;
         this.productCategory = productCategory;
+        this.productCategory.addProduct(this);
         this.price = price;
     }
 

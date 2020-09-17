@@ -3,6 +3,7 @@ package br.com.exactalabs.bicycleshop.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -19,9 +20,21 @@ public class ProductCategory {
     @OneToMany(mappedBy = "productCategory")
     private Collection<Product> productList;
 
-    public ProductCategory(String name, Collection<Product> productList) {
+    public ProductCategory() {
+        this.productList = new ArrayList<>();
+    }
+
+    public ProductCategory(String name) {
+        this();
         this.name = name;
-        this.productList = productList;
+    }
+
+    public void addProduct(Product product){
+        this.productList.add(product);
+    }
+
+    public void removeProduct(Product product) {
+        this.productList.remove(product);
     }
 
     public Long getId() {
