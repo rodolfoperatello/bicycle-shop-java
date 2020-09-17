@@ -1,3 +1,5 @@
+package br.com.exactalabs.bicycleshop.entity;
+
 import java.math.BigDecimal;
 
 public class Product {
