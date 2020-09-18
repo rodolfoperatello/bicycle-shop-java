@@ -11,22 +11,16 @@ public class Adress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "A rua não pode ser nulo")
     @NotBlank(message = "A rua não pode ser vazio")
     private String street;
-    @NotNull(message = "O bairro não pode ser nulo")
     @NotBlank(message = "O bairro não pode ser vazio")
     private String district;
-    @NotNull(message = "A cidade não pode ser nulo")
     @NotBlank(message = "A cidade não pode ser vazio")
     private String city;
-    @NotNull(message = "O estado não pode ser nulo")
     @NotBlank(message = "O estado não pode ser vazio")
     private String state;
-    @NotNull(message = "O CEP não pode ser nulo")
     @NotBlank(message = "O CEP não pode ser vazio")
     private String zipcode;
-    @NotNull(message = "O número não pode ser nulo")
     @NotBlank(message = "O número não pode ser vazio")
     @Column(name = "adressnumber")
     private String number;
