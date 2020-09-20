@@ -4,7 +4,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,35 +19,27 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "O nome não pode ser nulo")
     @NotBlank(message = "O nome não pode ser vazio")
     private String name;
     @Column(name = "last_name")
-    @NotNull(message = "O sobrenome não pode ser nulo")
     @NotBlank(message = "O sobrenome não pode ser vazio")
     private String lastName;
-    @NotNull(message = "O telefone principal não pode ser nulo")
     @NotBlank(message = "O telefone principal não pode ser vazio")
     private String mainPhone;
     private String secondaryPhone;
     private LocalDate birthday;
-    @NotNull(message = "O endereço do cliente não pode ser nulo")
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer")
-    private Collection<Adress> adressList;
+    private Collection<@NotNull(message = "O endereço não pode ser nulo") Adress> adressList = new ArrayList<>();
 
-    public Client(){
-        this.adressList = new ArrayList<>();
-    }
 
     public Client(String name, String lastName, String mainPhone, String secondaryPhone, LocalDate birthday, Adress adress) {
-        this();
         this.name = name;
         this.lastName = lastName;
         this.mainPhone = mainPhone;
         this.secondaryPhone = secondaryPhone;
         this.birthday = birthday;
-        this.adressList.add(adress);
+        this.addAdress(adress);
     }
 
     public Long getId() {

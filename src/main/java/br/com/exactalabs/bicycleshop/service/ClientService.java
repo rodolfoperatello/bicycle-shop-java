@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 
 @Service
 public class ClientService {
@@ -42,7 +43,6 @@ public class ClientService {
 
     @Transactional
     public Client saveClient(Client client) {
-        this.adressRepository.saveAll(client.getAdressList());
         return this.clientRepository.save(client);
     }
 
@@ -50,10 +50,7 @@ public class ClientService {
     public void deleteClientById(Long id) {
         var client = this.clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        var adresses = client.getAdressList();
-
         this.clientRepository.deleteById(id);
-        this.adressRepository.deleteAll(adresses);
     }
 
     public void updateClient(Client client) {
