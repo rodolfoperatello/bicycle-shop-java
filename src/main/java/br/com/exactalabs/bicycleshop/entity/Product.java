@@ -2,10 +2,7 @@ package br.com.exactalabs.bicycleshop.entity;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -22,7 +19,7 @@ public class Product {
     @JoinColumn(name = "productCategory")
     private ProductCategory productCategory;
     @NotNull(message = "O valor não pode ser nulo")
-    @Min(value = 0, message = "O valor deve ser 0 ou maior")
+    @PositiveOrZero(message = "O valor deve ser maior ou igual a zero")
     private BigDecimal price;
 
     public Product(){
