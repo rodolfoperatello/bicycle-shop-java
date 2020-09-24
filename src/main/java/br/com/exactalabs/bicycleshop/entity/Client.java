@@ -2,6 +2,7 @@ package br.com.exactalabs.bicycleshop.entity;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -38,7 +39,7 @@ public class Client {
 
     }
 
-    public Client(String name, String lastName, String mainPhone, String secondaryPhone, LocalDate birthday, Adress adress) {
+    public Client(String name, String lastName, String mainPhone, String secondaryPhone, LocalDate birthday,Adress adress) {
         this.name = name;
         this.lastName = lastName;
         this.mainPhone = mainPhone;
