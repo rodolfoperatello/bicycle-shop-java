@@ -31,6 +31,7 @@ public class Client {
     @Column(name = "secondary_phone")
     private String secondaryPhone;
     private LocalDate birthday;
+    @NotEmpty(message = "A lista não pode ser ser vazia")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Collection<Adress> adressList = new ArrayList<>();
@@ -104,9 +105,10 @@ public class Client {
         this.adressList = adressList;
     }
 
-
     public void addAdress(Adress adress) {
-        this.adressList.add(adress);
+        if (adress != null){
+            this.adressList.add(adress);
+        }
     }
 
     public void removeAdress(Adress adress) {
