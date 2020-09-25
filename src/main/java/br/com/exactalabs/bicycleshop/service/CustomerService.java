@@ -27,25 +27,6 @@ public class CustomerService {
         return pageRequest;
     }
 
-
-    public void deleteAddressById(Long id) {
-        this.addressRepository.deleteById(id);
-    }
-
-    public void updateAddress(Address address) {
-        this.addressRepository.save(address);
-    }
-
-    public Address findAddressById(Long id) {
-        return this.addressRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Endereço não encontrado"));
-    }
-
-    public Page<Address> findAllAddress(Integer pageNumber) {
-        var pageRequest = createPageRequest(pageNumber, 30);
-        return this.addressRepository.findAll(pageRequest);
-    }
-
     @Transactional
     public Customer saveCustomer(Customer customer) {
         return this.customerRepository.save(customer);

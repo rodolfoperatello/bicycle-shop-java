@@ -1,12 +1,11 @@
 package br.com.exactalabs.bicycleshop.entity;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -27,9 +26,9 @@ public class Customer {
     private String secondaryPhone;
     private LocalDate birthday;
     @NotEmpty(message = "A lista não pode ser ser vazia")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "customer_id")
-    private Collection<Address> addressList = new ArrayList<>();
+    private List<Address> addressList = new ArrayList<>();
 
     public Customer(){
 
@@ -92,11 +91,11 @@ public class Customer {
         this.birthday = birthday;
     }
 
-    public Collection<Address> getAdressList() {
+    public List<Address> getAdressList() {
         return addressList;
     }
 
-    public void setAdressList(Collection<Address> addressList) {
+    public void setAdressList(List<Address> addressList) {
         this.addressList = addressList;
     }
 

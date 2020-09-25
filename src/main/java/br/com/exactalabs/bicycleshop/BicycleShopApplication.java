@@ -22,7 +22,7 @@ public class BicycleShopApplication {
     public CommandLineRunner run(ApplicationContext appContext) {
         return args -> {
 
-            var clientService = appContext.getBean(CustomerService.class);
+            var customerService = appContext.getBean(CustomerService.class);
 
             var customerAdress = new Address("Rua Oliveira", "My District", "Araxá", "Minas Gerais",
                     "38181-564",  "1652");
@@ -34,7 +34,22 @@ public class BicycleShopApplication {
             //customer.addAdress(null);
 
 
-            clientService.deleteCustomerById(178L);
+            //clientService.deleteCustomerById(178L);
+
+            //PEGANDO CUSTOMER DO BANCO, ATUALIZANDO ENDEREÇO E FAZENDO UPDATE DO CUSTOMER
+//            var customerInBD = customerService.findCustomerById(180L);
+//            customerInBD.getAdressList().get(0).setStreet("RUA");
+//            customerInBD.getAdressList().get(0).setDistrict("BAIRRO");
+//            customerInBD.getAdressList().get(0).setCity("CIDADE");
+//            customerService.updateCustomer(customerInBD);
+
+
+            //PEGANDO CUSTOMER DO BANCO, DELETANDO ENDEREÇO E FAZENDO UPDATE DO CUSTOMER
+//            var customerInBD = customerService.findCustomerById(180L);
+//            customerInBD.removeAdress(customerInBD.getAdressList().get(0));
+//            customerService.updateCustomer(customerInBD);
+
+
 
             //System.out.println(clientService.saveCustomer(customer));
 
@@ -43,6 +58,9 @@ public class BicycleShopApplication {
             System.out.println("Spring bootado!");
 
 
+            ///alterar os métodos de adress do customer
+
+            //usar propriedade orphan removal
 
 
 
