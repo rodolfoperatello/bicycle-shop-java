@@ -31,7 +31,7 @@ public class BicycleShopApplication {
 
             var customer = new Customer("Luiza", "Cavalcanti", "(21) 9744-8535",
                     "", LocalDate.of(1991, 10,10), customerAdress);
-            customer.addAdress(customerAdress2);
+            //customer.addAdress(null);
 
 
 
