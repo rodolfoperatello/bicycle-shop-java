@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "customer")
-public class Client {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +30,11 @@ public class Client {
     @JoinColumn(name = "customer_id")
     private Collection<Address> addressList = new ArrayList<>();
 
-    public Client(){
+    public Customer(){
 
     }
 
-    public Client(String name, String lastName, String mainPhone, String secondaryPhone, LocalDate birthday, Address address) {
+    public Customer(String name, String lastName, String mainPhone, String secondaryPhone, LocalDate birthday, Address address) {
         this.name = name;
         this.lastName = lastName;
         this.mainPhone = mainPhone;
