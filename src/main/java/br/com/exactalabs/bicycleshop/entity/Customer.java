@@ -25,7 +25,7 @@ public class Customer {
     @Column(name = "secondary_phone")
     private String secondaryPhone;
     private LocalDate birthday;
-    @NotEmpty(message = "A lista não pode ser ser vazia")
+    @NotEmpty(message = "A lista de endereços não pode estar vazia")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "customer_id")
     private List<Address> addressList = new ArrayList<>();
