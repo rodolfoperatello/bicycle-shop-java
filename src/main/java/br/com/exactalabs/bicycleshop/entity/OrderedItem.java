@@ -14,6 +14,8 @@ public class OrderedItem {
     private Product product;
     private int quantitaty;
 
+    public OrderedItem(){
+    }
 
     public OrderedItem(Product product, int quantitaty){
         this.product = product;
