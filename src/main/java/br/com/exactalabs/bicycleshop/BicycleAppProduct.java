@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Bean;
 import java.math.BigDecimal;
 
 @SpringBootApplication
-public class BicycleApp {
+public class BicycleAppProduct {
 
     public static void main(String[] args) {
-        SpringApplication.run(BicycleApp.class, args);
+        SpringApplication.run(BicycleAppProduct.class, args);
     }
 
     @Bean
