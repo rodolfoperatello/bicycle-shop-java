@@ -30,7 +30,7 @@ public class Order {
     @JoinColumn(name = "payment_id")
     @NotNull(message = "O método de pagamento não pode ser nulo")
     private Payment payment;
-    @FutureOrPresent(message = "A data da ordem de compra não pode ser no passado")
+    @FutureOrPresent(message = "A data da ordem de compra não pode estar no passado")
     @Column(name = "order_date")
     private LocalDate orderDate;
     @PositiveOrZero(message = "O total da ordem deve ser maior ou igual a zero")
