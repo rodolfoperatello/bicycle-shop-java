@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 
 @Entity
-@Table(name = "creditCard")
+@Table(name = "credit_card")
 @PrimaryKeyJoinColumn(name = "payment_id")
 public class CreditCard extends Payment {
 
