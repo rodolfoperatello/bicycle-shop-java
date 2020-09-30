@@ -40,9 +40,9 @@ public class BicycleShopApplication {
             var squeezer = productService.findProductById(344L);
             var helmetDragonBorn = productService.findProductById(353L);
 
-            var orderedItens1 = new OrderedItem(bikeMountain, 4);
-            var orderedItens2 = new OrderedItem(squeezer, 3);
-            var orderedItens3 = new OrderedItem(helmetDragonBorn, 2);
+            var orderedItens1 = new OrderedItem(bikeMountain, 1);
+            var orderedItens2 = new OrderedItem(squeezer, 1);
+            var orderedItens3 = new OrderedItem(helmetDragonBorn, 1);
 
 
             var creditCardCustomer1 = new CreditCard("4916396776205913", "Giovanna Gonçalves", "231", YearMonth.of(2030, 12));
@@ -51,7 +51,7 @@ public class BicycleShopApplication {
             var bankSlip2 = new BankSlip("99999999999999999");
 
 
-            var order = new Order(customer, creditCardCustomer1);
+            var order = new Order(customer, creditCardCustomer2);
             order.addOrderedItem(orderedItens1);
             order.addOrderedItem(orderedItens2);
             order.addOrderedItem(orderedItens3);
@@ -59,7 +59,7 @@ public class BicycleShopApplication {
 
             //orderService.saveOrder(order);
 
-            orderService.deleteOrderById(176L);
+            orderService.deleteOrderById(178L);
 
 
 
