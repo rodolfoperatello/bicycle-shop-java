@@ -3,8 +3,8 @@ package br.com.exactalabs.bicycleshop.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order_items")
-public class OrderItems {
+@Table(name = "order_item")
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +14,10 @@ public class OrderItems {
     private Product product;
     private int quantitaty;
 
-    public OrderItems(){
+    public OrderItem(){
     }
 
-    public OrderItems(Product product, int quantitaty){
+    public OrderItem(Product product, int quantitaty){
         this.product = product;
         this.quantitaty = quantitaty;
     }

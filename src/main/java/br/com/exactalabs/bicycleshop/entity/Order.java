@@ -21,7 +21,7 @@ public class Order {
     @JoinColumn(name = "order_id")
     @NotEmpty(message = "A lista de itens do pedido não pode ser estar vazia")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Collection<OrderItems> orderItems = new ArrayList<>();
+    private Collection<OrderItem> orderItems = new ArrayList<>();
     @OneToOne
     @JoinColumn(name = "customer_id")
     @NotNull(message = "O cliente não pode ser nulo")
@@ -49,22 +49,22 @@ public class Order {
         this.payment = payment;
     }
 
-    private void updateOrderTotal(OrderItems orderItems){
-        var productPrice = orderItems.getProduct().getPrice();
-        var productQuantity = orderItems.getQuantitaty();
+    private void updateOrderTotal(OrderItem orderItem){
+        var productPrice = orderItem.getProduct().getPrice();
+        var productQuantity = orderItem.getQuantitaty();
         this.orderTotal = this.orderTotal.add(productPrice.multiply(BigDecimal.valueOf(productQuantity)));
         this.payment.setPaymentValue(this.getOrderTotal());
     }
 
-    public void addOrderedItem(OrderItems orderItems){
-        if (orderItems != null) {
-            this.orderItems.add(orderItems);
-            updateOrderTotal(orderItems);
+    public void addOrderedItem(OrderItem orderItem){
+        if (orderItem != null) {
+            this.orderItems.add(orderItem);
+            updateOrderTotal(orderItem);
         }
     }
 
-    public void removeOrderedItem(OrderItems orderItems){
-        this.orderItems.remove(orderItems);
+    public void removeOrderedItem(OrderItem orderItem){
+        this.orderItems.remove(orderItem);
     }
 
 
@@ -76,11 +76,11 @@ public class Order {
         this.id = id;
     }
 
-    public Collection<OrderItems> getOrderedItems() {
+    public Collection<OrderItem> getOrderedItems() {
         return orderItems;
     }
 
-    public void setOrderedItems(Collection<OrderItems> orderItems) {
+    public void setOrderedItems(Collection<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 
