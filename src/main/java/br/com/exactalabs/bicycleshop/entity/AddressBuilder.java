@@ -36,7 +36,7 @@ public class AddressBuilder {
         return this;
     }
 
-    public AddressBuilder setNumber(String Number){
+    public AddressBuilder setNumber(String number){
         this.number = number;
         return this;
     }

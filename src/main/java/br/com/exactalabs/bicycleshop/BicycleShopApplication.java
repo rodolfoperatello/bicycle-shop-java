@@ -64,7 +64,7 @@ public class BicycleShopApplication {
             var newCustomer = new CustomerBuilder()
                     .setName("José")
                     .setLastName("Pedro")
-                    .setCpf("123213123")
+                    .setCpf("94143295016")
                     .setMainPhone("16988888888")
                     .setSecondaryPhone("")
                     .setBirthday(LocalDate.of(2020,5,5))
@@ -75,7 +75,7 @@ public class BicycleShopApplication {
 
             System.out.println(newCustomer);
 
-            //customerService.saveCustomer(newCustomer);
+            customerService.saveCustomer(newCustomer);
 
 
 
