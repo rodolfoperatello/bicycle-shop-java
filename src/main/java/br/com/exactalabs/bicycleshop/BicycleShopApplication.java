@@ -31,6 +31,7 @@ public class BicycleShopApplication {
             var productService = appContext.getBean(ProductService.class);
             var orderService = appContext.getBean(OrderService.class);
 
+<<<<<<< HEAD
             var newAdress1 = new Address.AddressBuilder()
                     .street("Camargo Schutz")
                     .district("Vila Prado")
@@ -62,6 +63,16 @@ public class BicycleShopApplication {
             var bikeMountain = productService.findProductById(379L);
             var squeezer = productService.findProductById(383L);
             var helmetDragonBorn = productService.findProductById(384L);
+=======
+            var newAdress = new Address("Rua", "District", "City", "State", "ZipCode", "Number");
+            var newCustomer = new Customer("Rodolfo", "Peratello", "16999999999", "", LocalDate.of(2020, 10, 2), newAdress);
+
+            customerService.saveCustomer(newCustomer);
+
+            var bikeMountain = productService.findProductById(255L);
+            var squeezer = productService.findProductById(257L);
+            var helmetDragonBorn = productService.findProductById(258L);
+>>>>>>> develop
 
             var orderedItens1 = new OrderItem(bikeMountain, 1);
             var orderedItens2 = new OrderItem(squeezer, 1);
