@@ -45,7 +45,7 @@ public class Customer {
 
     }
 
-    public Customer(String name, String lastName, String cpf, String mainPhone, String secondaryPhone, LocalDate birthday, String email, List<Address> addressList) {
+    private Customer(String name, String lastName, String cpf, String mainPhone, String secondaryPhone, LocalDate birthday, String email, List<Address> addressList) {
         this.name = name;
         this.lastName = lastName;
         this.cpf = cpf;
@@ -54,6 +54,63 @@ public class Customer {
         this.birthday = birthday;
         this.email = email;
         this.addressList = addressList;
+    }
+
+    public static class CustomerBuilder {
+
+        private String name;
+        private String lastName;
+        private String cpf;
+        private String email;
+        private String mainPhone;
+        private String secondaryPhone;
+        private LocalDate birthday;
+        private List<Address> addressList = new ArrayList<>();
+
+
+        public CustomerBuilder name(String name){
+            this.name = name;
+            return this;
+        }
+
+        public CustomerBuilder lastName(String lastName){
+            this.lastName = lastName;
+            return this;
+        }
+
+        public CustomerBuilder cpf(String cpf){
+            this.cpf = cpf;
+            return this;
+        }
+
+        public CustomerBuilder email(String email){
+            this.email = email;
+            return this;
+        }
+
+        public CustomerBuilder mainPhone(String mainPhone){
+            this.mainPhone = mainPhone;
+            return this;
+        }
+
+        public CustomerBuilder secondaryPhone(String secondaryPhone){
+            this.secondaryPhone = secondaryPhone;
+            return this;
+        }
+
+        public CustomerBuilder birthday(LocalDate birthday){
+            this.birthday = birthday;
+            return this;
+        }
+
+        public CustomerBuilder addAddress(Address adress){
+            this.addressList.add(adress);
+            return this;
+        }
+
+        public Customer createCustomer(){
+            return new Customer(name, lastName, cpf, mainPhone, secondaryPhone, birthday, email, addressList);
+        }
     }
 
     public Long getId() {

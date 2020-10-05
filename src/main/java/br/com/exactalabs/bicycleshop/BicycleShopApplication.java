@@ -42,14 +42,14 @@ public class BicycleShopApplication {
                     .createAddress();
 
 
-            var newCustomer = new CustomerBuilder()
-                    .setName("José")
-                    .setLastName("Pedro")
-                    .setCpf("94143295016")
-                    .setMainPhone("16988888888")
-                    .setSecondaryPhone("")
-                    .setBirthday(LocalDate.of(2020,5,5))
-                    .setEmail("josepedro@email.com")
+            var newCustomer = new Customer.CustomerBuilder()
+                    .name("José")
+                    .lastName("Pedro")
+                    .cpf("94143295016")
+                    .mainPhone("16988888888")
+                    .secondaryPhone("")
+                    .birthday(LocalDate.of(2020,5,5))
+                    .email("josepedro@email.com")
                     .addAddress(newAdress1)
                     .createCustomer();
 
