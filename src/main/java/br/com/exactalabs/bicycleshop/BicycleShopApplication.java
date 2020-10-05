@@ -11,7 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
+=======
+import java.time.LocalDate;
+>>>>>>> develop
 import java.time.YearMonth;
 
 @SpringBootApplication
@@ -31,10 +35,6 @@ public class BicycleShopApplication {
             var productCategoryService = appContext.getBean(ProductCategoryService.class);
             var orderService = appContext.getBean(OrderService.class);
 
-            var newAdress = new Address("Rua", "District", "City", "State", "ZipCode", "Number");
-            var newCustomer = new Customer("Rodolfo", "Peratello", "16999999999", "", null, newAdress);
-
-            //customerService.saveCustomer(newCustomer);
 
             var bikeCategoryToSave = new ProductCategory("Bike");
             var glovesCategoryToSave = new ProductCategory("Gloves");
@@ -65,11 +65,10 @@ public class BicycleShopApplication {
 //            productService.saveProduct(squeezerSquirtle);
 //            productService.saveProduct(capaceteDragonBorn);
 
+//            var bikeMountain = productService.findProductById(379L);
+//            var squeezer = productService.findProductById(383L);
+//            var helmetDragonBorn = productService.findProductById(384L);
 
-//            var bikeMountain = productService.findProductById(340L);
-//            var squeezer = productService.findProductById(344L);
-//            var helmetDragonBorn = productService.findProductById(353L);
-//
 //            var orderedItens1 = new OrderItem(bikeMountain, 1);
 //            var orderedItens2 = new OrderItem(squeezer, 1);
 //            var orderedItens3 = new OrderItem(helmetDragonBorn, 1);
@@ -86,16 +85,7 @@ public class BicycleShopApplication {
 //
 //            orderService.saveOrder(order);
 
-            //orderService.deleteOrderById(179L);
 
-            //System.out.println(orderService.findOrderById(180L));
-//            var orderToUpdate = orderService.findOrderById(180L);
-//            orderToUpdate.setOrderTotal(BigDecimal.valueOf(0));
-//            orderService.updateOrder(orderToUpdate);
-
-            //System.out.println(orderService.findAllOrder(0).getContent().toString());
-
-            System.out.println(productService.findAllProductsByName("lu", 0).getContent());
 
             System.out.println("Spring bootado");
 
