@@ -1,5 +1,8 @@
 package br.com.exactalabs.bicycleshop.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -16,8 +19,9 @@ public class ProductCategory {
     private Long id;
     @NotBlank(message = "O nome não pode estar vazio")
     private String name;
-    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.REMOVE)
-    @NotEmpty(message = "A lista de produtos não pode estar vazia")
+    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    //@LazyCollection(LazyCollectionOption.FALSE)
+    //@NotEmpty(message = "A lista de produtos não pode estar vazia")
     private Collection<Product> productList = new ArrayList<>();
 
     public ProductCategory (){

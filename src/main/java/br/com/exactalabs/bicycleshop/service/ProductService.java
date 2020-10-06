@@ -15,11 +15,10 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     private ProductRepository productRepository;
-    private ProductCategoryRepository productCategoryRepository;
 
-    public ProductService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository){
+
+    public ProductService(ProductRepository productRepository){
         this.productRepository = productRepository;
-        this.productCategoryRepository = productCategoryRepository;
     }
 
     private PageRequest createPageRequest(Integer pageNumber, Integer pageSize){
@@ -27,17 +26,10 @@ public class ProductService {
         return pageRequest;
     }
 
-    public ProductCategory findCategoryById(Long id){
-        return this.productCategoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+    public Product saveProduct(Product product){
+        return this.productRepository.save(product);
     }
 
-    public void deleteCategoryById(Long id) {
-        this.productCategoryRepository.deleteById(id);
-    }
-
-    public void updateCategory(ProductCategory productCategory) {
-        this.productCategoryRepository.save(productCategory);
-    }
 
     public Product findProductById(Long id){
         return this.productRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
@@ -57,8 +49,9 @@ public class ProductService {
     }
 
     public Page<Product> findAllProductsByName(String name, Integer pageNumber){
+        String nameSearch = "%" + name + "%";
         var pageRequest = createPageRequest(pageNumber, 30);
-        return this.productRepository.findAllProductByNameLikeOrderByNameAsc(name, pageRequest);
+        return this.productRepository.findAllProductByNameLikeOrderByNameAsc(nameSearch, pageRequest);
     }
 
     public Page<Product> findAllProductsByCategory(String name, Integer pageNumber) {
@@ -75,6 +68,7 @@ public class ProductService {
         var pageRequest = createPageRequest(pageNumber, 30);
         return this.productRepository.findAllProductByOrderByPriceDesc(pageRequest);
     }
+
 
 
 }
