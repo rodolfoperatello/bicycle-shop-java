@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 
 @SpringBootApplication
@@ -26,11 +27,17 @@ public class BicycleShopApplication {
     public CommandLineRunner run(ApplicationContext appContext) {
         return args -> {
 
-
             var customerService = appContext.getBean(CustomerService.class);
             var productService = appContext.getBean(ProductService.class);
             var productCategoryService = appContext.getBean(ProductCategoryService.class);
             var orderService = appContext.getBean(OrderService.class);
+
+            var customerAddress = new Address("Rua", "District", "City", "State", "Zipcode", "Number");
+            var newCustomer = new Customer("Nome", "Lastname", "Mainphone",
+                    "", LocalDate.of(1991,5,5), customerAddress);
+
+
+            customerService.saveCustomer(newCustomer);
 
 
             var bikeCategoryToSave = new ProductCategory("Bike");
@@ -62,25 +69,25 @@ public class BicycleShopApplication {
 //            productService.saveProduct(squeezerSquirtle);
 //            productService.saveProduct(capaceteDragonBorn);
 
-//            var bikeMountain = productService.findProductById(379L);
-//            var squeezer = productService.findProductById(383L);
-//            var helmetDragonBorn = productService.findProductById(384L);
+            var bikeMountain = productService.findProductById(379L);
+            var squeezer = productService.findProductById(383L);
+            var helmetDragonBorn = productService.findProductById(384L);
 
-//            var orderedItens1 = new OrderItem(bikeMountain, 1);
-//            var orderedItens2 = new OrderItem(squeezer, 1);
-//            var orderedItens3 = new OrderItem(helmetDragonBorn, 1);
+            var orderedItens1 = new OrderItem(bikeMountain, 2);
+            var orderedItens2 = new OrderItem(squeezer, 2);
+            var orderedItens3 = new OrderItem(helmetDragonBorn, 2);
 //
 //            var creditCardCustomer1 = new CreditCard("4916396776205913", "Giovanna Gonçalves", "231", YearMonth.of(2030, 12));
 //            var creditCardCustomer2 = new CreditCard("4539069995203095", "Luiza Cavalcanti", "771", YearMonth.of(2026, 6));
-//            var bankSlip1 = new BankSlip("11111111111111111");
+            var bankSlip1 = new BankSlip("11111111111111111");
 //            var bankSlip2 = new BankSlip("99999999999999999");
 //
-//            var order = new Order(newCustomer, creditCardCustomer2);
-//            order.addOrderedItem(orderedItens1);
-//            order.addOrderedItem(orderedItens2);
-//            order.addOrderedItem(orderedItens3);
+            var order = new Order(newCustomer, bankSlip1);
+            order.addOrderedItem(orderedItens1);
+            order.addOrderedItem(orderedItens2);
+            order.addOrderedItem(orderedItens3);
 //
-//            orderService.saveOrder(order);
+            orderService.saveOrder(order);
 
 
 
