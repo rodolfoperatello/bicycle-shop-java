@@ -21,7 +21,7 @@ public class ProductController {
         return this.productService.findProductById(id);
     }
 
-    @GetMapping("/products")
+    @GetMapping("/product")
     public List<Product> findAllProducts(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber){
         return this.productService.findAllProducts(pageNumber).getContent();
     }
@@ -34,6 +34,11 @@ public class ProductController {
     @PutMapping("/product")
     public Product updateProduct(@RequestBody Product product){
         return this.productService.updateProduct(product);
+    }
+
+    @DeleteMapping("/product/{id}")
+    public void deleteProductById(@PathVariable(value = "id") Long id){
+        this.productService.deleteProductById(id);
     }
 
 }
