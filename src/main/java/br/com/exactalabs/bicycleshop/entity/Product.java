@@ -29,8 +29,15 @@ public class Product {
     public Product(String name, ProductCategory productCategory, BigDecimal price) {
         this.name = name;
         this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
         this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
