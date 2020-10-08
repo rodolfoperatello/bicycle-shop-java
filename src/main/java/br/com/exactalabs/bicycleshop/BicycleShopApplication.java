@@ -55,7 +55,7 @@ public class BicycleShopApplication {
                     .addAddress(addressToSave)
                     .createCustomer();
 
-            customerService.saveCustomer(customerToSave);
+            //customerService.saveCustomer(customerToSave);
 
             var customer = customerService.findCustomerById(218L);
 
