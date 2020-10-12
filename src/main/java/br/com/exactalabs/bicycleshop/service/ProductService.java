@@ -35,11 +35,11 @@ public class ProductService {
     }
 
     @Transactional
-    public Product updateProduct(Long id, Product product){
-        var productDB = findProductById(id);
-        product.setName(productDB.getName());
-        product.setPrice(productDB.getPrice());
-        product.setProductCategory(productDB.getProductCategory());
+    public Product updateProduct(Long id, Product productUpdate){
+        var product = findProductById(id);
+        product.setName(productUpdate.getName());
+        product.setPrice(productUpdate.getPrice());
+        product.setProductCategory(productUpdate.getProductCategory());
         return this.productRepository.save(product);
     }
 
