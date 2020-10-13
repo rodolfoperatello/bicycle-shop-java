@@ -72,7 +72,4 @@ public class ProductService {
         var pageRequest = createPageRequest(pageNumber, 30);
         return this.productRepository.findAllProductByOrderByPriceDesc(pageRequest);
     }
-
-
-
 }

@@ -63,10 +63,4 @@ public class ProductController {
         var newProduct = this.productService.saveProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
     }
-
-    @DeleteMapping
-    public ResponseEntity<?> deleteProductById(@RequestParam Long id){
-        productService.deleteProductById(id);
-        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).body("PRODUCT SUCCESSFULLY DELETED");
-    }
 }
